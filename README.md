@@ -8,7 +8,7 @@
 </p>
 
 ## First Time SetUp Extra Reminder
-Since new version of laravel 12 passport change some of it way compare to previous version, so need to run 2 command to generate client secret
+Since new version of laravel v12, passport v13 change some of it way compare to previous version, so need to run 2 command to generate client secret
 - `php artisan passport:client --personal`
 - `php artisan passport:client --password`
 
