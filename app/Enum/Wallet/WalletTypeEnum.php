@@ -1,5 +1,5 @@
 <?php
-namespace App\Enum;
+namespace App\Enum\Wallet;
 
 use App\Enum\EnumTrait;
 

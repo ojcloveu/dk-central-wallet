@@ -24,7 +24,7 @@ enum CurrencyTgEnum: string
             AFTER INSERT ON currencies
             FOR EACH ROW
             BEGIN
-                UPDATE wallet
+                UPDATE wallets
                 SET meta = JSON_SET(
                     COALESCE(meta, JSON_OBJECT()),
                     "$.code", NEW.code,
@@ -41,7 +41,7 @@ enum CurrencyTgEnum: string
             AFTER UPDATE ON currencies
             FOR EACH ROW
             BEGIN
-                UPDATE wallet
+                UPDATE wallets
                 SET meta = JSON_SET(
                     COALESCE(meta, JSON_OBJECT()),
                     "$.code", NEW.code,

@@ -2,9 +2,9 @@
 
 namespace App\Services\Wallet;
 
-use App\Enum\WalletTypeEnum;
-use App\Models\Wallet\Currency;
 use App\Models\Wallet\Wallet;
+use App\Models\Wallet\Currency;
+use App\Enum\Wallet\WalletTypeEnum;
 
 class WalletService {
     use TransactionTrait;
@@ -23,7 +23,7 @@ class WalletService {
 
         Wallet::create([
             'user_id' => $id,
-            'currency' => $currency->id,
+            'currency_id' => $currency->id,
             'name' => 'Wallet '.$currency->name,
             'type' => $type
         ]);
