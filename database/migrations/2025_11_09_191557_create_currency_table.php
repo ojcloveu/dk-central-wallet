@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 8)->unique(); // e.g. USD
+            $table->string('code', 8); // e.g. USD
+            $table->string('short_code', 8); // e.g. USD
             $table->string('name', 64);
             $table->unsignedSmallInteger('minor_unit')->default(100); // e.g. 100 for cents, 1000 for mills
             $table->unsignedSmallInteger('decimal_places')->default(2); // helpful metadata
             $table->timestamps();
+            $table->unique(['code', 'short_code']);
             $table->unsignedBigInteger('create_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
         });

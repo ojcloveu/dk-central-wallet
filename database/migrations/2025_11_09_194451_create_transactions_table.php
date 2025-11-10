@@ -29,7 +29,7 @@ return new class extends Migration
 
 
             // reason / note
-            $table->string('description', 255)->nullable();
+            $table->string('remark', 255)->nullable();
 
 
             // transfer grouping: both sides share group id

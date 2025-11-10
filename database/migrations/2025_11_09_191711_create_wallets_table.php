@@ -26,6 +26,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('create_by')->nullable();
             $table->unsignedBigInteger('update_by')->nullable();
+            $table->json('meta')->nullable(); // for read-only, write by currency table trigger, for performance reason
 
             // DB integrity
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
