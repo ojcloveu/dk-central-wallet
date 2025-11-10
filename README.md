@@ -12,7 +12,7 @@ Since new version of laravel v12, passport v13 change some of it way compare to 
 - `php artisan passport:client --personal`
 - `php artisan passport:client --password`
 
-then update env: `PASSPORT_PASSWORD_ID`, `PASSPORT_PASSWORD_SECRET`
+then update env (value from password grand type): `PASSPORT_PASSWORD_ID`, `PASSPORT_PASSWORD_SECRET`
 Library IssueToken has been update to work with new passport version but currently only support from env, not work with param pass down along with method
 
 Next, run seeder `php artisan db:seed --class="Database\\Seeders\\Production\\BaseSeeder"`
