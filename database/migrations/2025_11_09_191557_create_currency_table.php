@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('decimal_places')->default(2); // helpful metadata
             $table->timestamps();
             $table->unique(['code', 'short_code']);
-            $table->unsignedBigInteger('create_by')->nullable();
-            $table->unsignedBigInteger('update_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

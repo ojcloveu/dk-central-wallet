@@ -5,6 +5,7 @@ namespace App\Services\Wallet;
 use App\Models\Wallet\Wallet;
 use App\Models\Wallet\Currency;
 use App\Enum\Wallet\WalletTypeEnum;
+use App\Services\Wallet\TransactionTrait;
 
 class WalletService {
     use TransactionTrait;
@@ -27,5 +28,23 @@ class WalletService {
             'name' => 'Wallet '.$currency->name,
             'type' => $type
         ]);
+    }
+    
+    public static function amountToDb($amount, int $minorUnit)
+    {
+        if ($minorUnit <= 0) {
+            return $amount;
+        }
+
+        return $amount * $minorUnit;
+    }
+    
+    public static function amountFromDb($amount, int $minorUnit)
+    {
+        if ($minorUnit <= 0) {
+            return $amount;
+        }
+
+        return $amount / $minorUnit;
     }
 }

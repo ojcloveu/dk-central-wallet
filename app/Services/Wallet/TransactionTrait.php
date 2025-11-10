@@ -15,18 +15,25 @@ trait TransactionTrait
         int $amount,
         string $status = TransactionStatusEnum::DEPOSIT->value,
         ?string $groupId = null,
-        bool $confirmed = false
+        bool $confirmed = false,
+        $meta = null,
+        array|null $other  = null
     )
     {
         Wallet::where('id', $walletId)
             ->update(['balance' => DB::raw("balance + {$amount}")]);
                 
+        $meta = $meta ? ['meta' => $meta] : [];
+        $other = $other ? $other : [];
+        
         Transaction::create([
             'wallet_id' => $walletId,
             'amount' => $amount,
             'status' => $status,
             'transfer_group_id' => $groupId,
-            'confirmed'=> $confirmed
+            'confirmed'=> $confirmed,
+            ...$meta,
+            ...$other
         ]);
     }
 
@@ -36,10 +43,12 @@ trait TransactionTrait
         string $status = TransactionStatusEnum::DEPOSIT->value,
         ?string $groupId = null,
         bool $confirmed = false,
-        int $retry = 5
+        int $retry = 5,
+        $meta = null,
+        array|null $other  = null
     )
     {
-        return DB::transaction(fn () => self::forceDeposit($walletId, $amount, $status, $groupId, $confirmed), $retry);
+        return DB::transaction(fn () => self::forceDeposit($walletId, $amount, $status, $groupId, $confirmed, $meta, $other), $retry);
     }
 
     public static function forceWithdraw(
@@ -47,18 +56,25 @@ trait TransactionTrait
         int $amount,
         string $status = TransactionStatusEnum::DEPOSIT->value,
         ?string $groupId = null,
-        bool $confirmed = false
+        bool $confirmed = false,
+        $meta = null,
+        array|null $other  = null
     )
     {
         Wallet::where('id', $walletId)
             ->update(['balance' => DB::raw("balance - {$amount}")]);
+                
+        $meta = $meta ? ['meta' => $meta] : [];
+        $other = $other ? $other : [];
 
         Transaction::create([
             'wallet_id' => $walletId,
             'amount' => -$amount,
             'status' => $status,
             'transfer_group_id' => $groupId,
-            'confirmed'=> $confirmed
+            'confirmed'=> $confirmed,
+            ...$meta,
+            ...$other
         ]);
     }
 
@@ -68,10 +84,12 @@ trait TransactionTrait
         string $status = TransactionStatusEnum::DEPOSIT->value,
         ?string $groupId = null,
         bool $confirmed = false,
-        int $retry = 5
+        int $retry = 5,
+        $meta = null,
+        array|null $other  = null
     )
     {
-        return DB::transaction(fn () => self::forceWithdraw($walletId, $amount, $status, $groupId, $confirmed), $retry);
+        return DB::transaction(fn () => self::forceWithdraw($walletId, $amount, $status, $groupId, $confirmed, $meta, $other), $retry);
     }
 
     public static function forceTransfer(
@@ -79,7 +97,8 @@ trait TransactionTrait
         int $toWalletId,
         string $amountMinorUnits,
         ?array $meta = null,
-        int $retry = 5
+        int $retry = 5,
+        array|null $other  = []
     )
     {
         // deterministic lock order
@@ -108,14 +127,24 @@ trait TransactionTrait
                 $amountMinorUnits,
                 $status,
                 $groupId,
-                $confirmed
+                $confirmed,
+                $meta,
+                other: [
+                    'holder_type' => Wallet::class,
+                    'holder_id' => $fromWallet->id
+                ]
             );
             self::forceDeposit(
                 $toWallet->id,
                 $amountMinorUnits,
                 $status,
                 $groupId,
-                $confirmed
+                $confirmed,
+                $meta,
+                other: [
+                    'holder_type' => Wallet::class,
+                    'holder_id' => $toWallet->id
+                ]
             );
             
             return $groupId;

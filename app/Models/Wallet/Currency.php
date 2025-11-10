@@ -12,8 +12,8 @@ class Currency extends Model
         'name',
         'minor_unit',
         'decimal_places',
-        'create_by',
-        'update_by',
+        'created_by',
+        'updated_by',
     ];
 
     protected function casts(): array
@@ -24,8 +24,8 @@ class Currency extends Model
             'name' => 'string',
             'minor_unit' => 'integer',
             'decimal_places' => 'integer',
-            'create_by' => 'integer',
-            'update_by' => 'integer',
+            'created_by' => 'integer',
+            'updated_by' => 'integer',
         ];
     }
 }

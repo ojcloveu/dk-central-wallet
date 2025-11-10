@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('type', 36)->default('default'); // no enum
 
             $table->timestamps();
-            $table->unsignedBigInteger('create_by')->nullable();
-            $table->unsignedBigInteger('update_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->json('meta')->nullable(); // for read-only, write by currency table trigger, for performance reason
 
             // DB integrity
