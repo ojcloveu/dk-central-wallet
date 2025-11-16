@@ -27,7 +27,7 @@ class DepositService
         $this->retry = $retry;
     }
 
-    public static function dbTransaction($enable = true, $retry = 5): static
+    public static function dbTransaction($enable = true, $retry = 100): static
     {
         return new static($enable, $retry);
     }

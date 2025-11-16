@@ -11,11 +11,13 @@ use App\Models\Wallet\Traits\MetaAttribute;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(WalletObserver::class)]
 class Wallet extends Model
 {
+    use HasFactory;
     use MetaAttribute;
     
     protected $fillable = [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8531a8b329e8c113023924fa34c380b3",
+    "content-hash": "1dc0f445634eb3827e9b48a4f409aa8e",
     "packages": [
         {
             "name": "brick/math",
@@ -4275,16 +4275,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.3.5",
+            "version": "v7.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "cdb80fa5869653c83cfe1a9084a673b6daf57ea7"
+                "reference": "c28ad91448f86c5f6d9d2c70f0cf68bf135f252a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/cdb80fa5869653c83cfe1a9084a673b6daf57ea7",
-                "reference": "cdb80fa5869653c83cfe1a9084a673b6daf57ea7",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c28ad91448f86c5f6d9d2c70f0cf68bf135f252a",
+                "reference": "c28ad91448f86c5f6d9d2c70f0cf68bf135f252a",
                 "shasum": ""
             },
             "require": {
@@ -4349,7 +4349,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.3.5"
+                "source": "https://github.com/symfony/console/tree/v7.3.6"
             },
             "funding": [
                 {
@@ -4369,7 +4369,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-14T15:46:26+00:00"
+            "time": "2025-11-04T01:21:42+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -6249,16 +6249,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4"
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/45112560a3ba2d715666a509a0bc9521d10b6c43",
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43",
                 "shasum": ""
             },
             "require": {
@@ -6312,7 +6312,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -6324,11 +6324,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-25T09:37:31+00:00"
+            "time": "2025-07-15T11:30:57+00:00"
         },
         {
             "name": "symfony/string",
@@ -6522,16 +6526,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d"
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/65a8bc82080447fae78373aa10f8d13b38338977",
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977",
                 "shasum": ""
             },
             "require": {
@@ -6580,7 +6584,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -6592,11 +6596,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-27T08:32:26+00:00"
+            "time": "2025-07-15T13:41:35+00:00"
         },
         {
             "name": "symfony/uid",
@@ -10010,6 +10018,71 @@
             "time": "2025-02-07T05:00:38+00:00"
         },
         {
+            "name": "spatie/fork",
+            "version": "1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/fork.git",
+                "reference": "bde768a99be8cff41b8ec4991b016dcb58f414e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/fork/zipball/bde768a99be8cff41b8ec4991b016dcb58f414e8",
+                "reference": "bde768a99be8cff41b8ec4991b016dcb58f414e8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-sockets": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "nesbot/carbon": "^2.66",
+                "pestphp/pest": "^1.23",
+                "phpunit/phpunit": "^9.5",
+                "spatie/ray": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Fork\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight solution for running code concurrently in PHP",
+            "homepage": "https://github.com/spatie/fork",
+            "keywords": [
+                "fork",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/fork/issues",
+                "source": "https://github.com/spatie/fork/tree/1.2.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-24T08:58:04+00:00"
+        },
+        {
             "name": "staabm/side-effects-detector",
             "version": "1.0.5",
             "source": {
@@ -10198,16 +10271,16 @@
         },
         {
             "name": "theseer/tokenizer",
-            "version": "1.2.3",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/tokenizer.git",
-                "reference": "737eda637ed5e28c3413cb1ebe8bb52cbf1ca7a2"
+                "reference": "d74205c497bfbca49f34d4bc4c19c17e22db4ebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/737eda637ed5e28c3413cb1ebe8bb52cbf1ca7a2",
-                "reference": "737eda637ed5e28c3413cb1ebe8bb52cbf1ca7a2",
+                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/d74205c497bfbca49f34d4bc4c19c17e22db4ebb",
+                "reference": "d74205c497bfbca49f34d4bc4c19c17e22db4ebb",
                 "shasum": ""
             },
             "require": {
@@ -10236,7 +10309,7 @@
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "support": {
                 "issues": "https://github.com/theseer/tokenizer/issues",
-                "source": "https://github.com/theseer/tokenizer/tree/1.2.3"
+                "source": "https://github.com/theseer/tokenizer/tree/1.3.0"
             },
             "funding": [
                 {
@@ -10244,7 +10317,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-03T12:36:25+00:00"
+            "time": "2025-11-13T13:44:09+00:00"
         },
         {
             "name": "webmozart/assert",
