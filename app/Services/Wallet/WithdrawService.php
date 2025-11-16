@@ -36,26 +36,17 @@ class WithdrawService
 
     protected function createWithoutDb()
     {
-
-
         $amount = WalletService::amountToDb($this->amount, $this->wallet->metaMinorUnit);
 
         if (! $this->forced) {
             $this->validated($amount, $this->wallet->id);
-        }
-
-        if ($this->confirmed) {
-            $this->updateWallet(
-                $this->wallet->id,
-                $amount
-            );
         }
                 
         $meta = $this->meta
             ? ['meta' => [...$this->wallet->meta, ...$this->meta]]
             : ['meta' => $this->wallet->meta];
         
-        return Transaction::create([
+        $withdraw = Transaction::create([
             'wallet_id' => $this->wallet->id,
             'balance' => -$amount,
             'status' => $this->status,
@@ -65,6 +56,15 @@ class WithdrawService
             ...$meta,
             ...$this->otherAttribute
         ]);
+
+        if ($this->confirmed) {
+            $this->updateWallet(
+                $this->wallet->id,
+                $amount
+            );
+        }
+
+        return $withdraw;
     }
 
     protected function updateWallet($walletId, $amount)
@@ -76,21 +76,23 @@ class WithdrawService
     protected function updateWithoutDb()
     {
         if (! $this->transaction->confirmed) {
-            $this->updateWallet(
-                $this->transaction->wallet_id,
-                abs($this->transaction->balance)
-            );
-
             $meta = $this->meta
                 ? ['meta' => [...$this->transaction->meta, ...$this->meta]]
                 : [];
 
-            return Transaction::where('uuid', $this->transaction->uuid)
+            $withdraw = Transaction::where('uuid', $this->transaction->uuid)
                 ->update([
                     'confirmed' => true,
                     ...$meta,
                     ...$this->otherAttribute
                 ]);
+            
+            $this->updateWallet(
+                $this->transaction->wallet_id,
+                abs($this->transaction->balance)
+            );
+            
+            return $withdraw;
         }
 
         return false;

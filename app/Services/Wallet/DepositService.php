@@ -35,19 +35,12 @@ class DepositService
     protected function createWithoutDb()
     {
         $amount = WalletService::amountToDb($this->amount, $this->wallet->metaMinorUnit);
-
-        if ($this->confirmed) {
-            $this->updateWallet(
-                $this->wallet->id,
-                $amount
-            );
-        }
                 
         $meta = $this->meta
             ? ['meta' => [...$this->wallet->meta, ...$this->meta]]
             : ['meta' => $this->wallet->meta];
         
-        return Transaction::create([
+        $deposit = Transaction::create([
             'wallet_id' => $this->wallet->id,
             'balance' => $amount,
             'status' => $this->status,
@@ -57,6 +50,15 @@ class DepositService
             ...$meta,
             ...$this->otherAttribute
         ]);
+
+        if ($this->confirmed) {
+            $this->updateWallet(
+                $this->wallet->id,
+                $amount
+            );
+        }
+
+        return $deposit;
     }
 
     protected function updateWallet($walletId, $amount)
@@ -68,21 +70,23 @@ class DepositService
     protected function updateWithoutDb()
     {
         if (! $this->transaction->confirmed) {
-            $this->updateWallet(
-                $this->transaction->wallet_id,
-                $this->transaction->balance
-            );
-
             $meta = $this->meta
                 ? ['meta' => [...$this->transaction->meta, ...$this->meta]]
                 : [];
 
-            return Transaction::where('uuid', $this->transaction->uuid)
+            $trans = Transaction::where('uuid', $this->transaction->uuid)
                 ->update([
                     'confirmed' => true,
                     ...$meta,
                     ...$this->otherAttribute
                 ]);
+
+            $this->updateWallet(
+                $this->transaction->wallet_id,
+                $this->transaction->balance
+            );
+            
+            return $trans;
         }
 
         return false;
