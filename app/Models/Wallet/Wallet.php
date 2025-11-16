@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Observers\WalletObserver;
 use App\Models\Wallet\Transaction;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Wallet\Traits\MetaAttribute;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 #[ObservedBy(WalletObserver::class)]
 class Wallet extends Model
 {
+    use MetaAttribute;
+    
     protected $fillable = [
         'uuid',
         'user_id',

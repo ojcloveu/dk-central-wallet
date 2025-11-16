@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Wallet\Wallet;
 use App\Libraries\ResponseLib;
 use App\Http\Controllers\Controller;
+use App\Services\Wallet\DepositService;
 use App\Services\Wallet\WalletService;
 
 class DepositApiController extends Controller
@@ -34,18 +35,11 @@ class DepositApiController extends Controller
         ]);
 
         try {
-            $amount = WalletService::amountToDb($req->amount, $wallet->meta['minor_unit']);
-            
-            WalletService::forceDepositDb(
-                $wallet->id,
-                $amount,
-                confirmed: true,
-                meta: $wallet->meta,
-                other: [
-                    'holder_type' => User::class,
-                    'holder_id' => $user->id
-                ]
-            );
+            $deposit = DepositService::dbTransaction()
+                ->wallet($wallet)
+                ->amount($req->amount)
+                ->confirmed()
+                ->create();
         } catch (\Throwable $th) {
             logger()->error(self::class . ' Error: '.$th);
 
@@ -55,7 +49,8 @@ class DepositApiController extends Controller
         }
 
         return ResponseLib::success(
-            message: 'Deposit '.$req->amount.' '.$wallet->meta['short_code'].' to '.$wallet->AccountNumber.' successfully.'
+            message: 'Deposit '.$req->amount.$wallet->meta['short_code'].' to '.$wallet->AccountNumber.' successfully.',
+            data: $deposit
         );
     }
 }

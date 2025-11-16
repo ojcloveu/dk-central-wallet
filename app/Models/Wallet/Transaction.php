@@ -3,12 +3,15 @@
 namespace App\Models\Wallet;
 
 use App\Observers\TransactionObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Wallet\Traits\MetaAttribute;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(TransactionObserver::class)]
 class Transaction extends Model
 {
+    use MetaAttribute;
+    
     protected $fillable = [
         'uuid',
         'wallet_id',

@@ -8,6 +8,8 @@ use App\Models\Wallet\Wallet;
 use App\Libraries\ResponseLib;
 use App\Http\Controllers\Controller;
 use App\Services\Wallet\WalletService;
+use App\Services\Wallet\WithdrawService;
+use Illuminate\Validation\ValidationException;
 
 class WithdrawApiController extends Controller
 {
@@ -34,18 +36,13 @@ class WithdrawApiController extends Controller
         ]);
 
         try {
-            $amount = WalletService::amountToDb($req->amount, $wallet->meta['minor_unit']);
-            
-            WalletService::forceWithdrawDb(
-                $wallet->id,
-                $amount,
-                confirmed: true,
-                meta: $wallet->meta,
-                other: [
-                    'holder_type' => User::class,
-                    'holder_id' => $user->id
-                ]
-            );
+            $withdraw = WithdrawService::dbTransaction()
+                ->wallet($wallet)
+                ->amount($req->amount)
+                ->confirmed()
+                ->create();
+        } catch (ValidationException $th) {
+            return ResponseLib::validateError($th);
         } catch (\Throwable $th) {
             logger()->error(self::class . ' Error: '.$th);
 
@@ -55,7 +52,8 @@ class WithdrawApiController extends Controller
         }
 
         return ResponseLib::success(
-            message: 'Withdraw '.$req->amount.' '.$wallet->meta['short_code'].' from '.$wallet->AccountNumber.' successfully.'
+            message: 'Withdraw '.$req->amount.$wallet->meta['short_code'].' from '.$wallet->AccountNumber.' successfully.',
+            data: $withdraw
         );
     }
 }
