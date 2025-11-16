@@ -20,5 +20,10 @@ class UserSeeder extends Seeder
             'name' => 'dev',
             'password' => Hash::make(1234)
         ]);
+
+         $model::firstOrCreate(['email' => 'dev2@dev2.com'], [
+            'name' => 'dev2',
+            'password' => Hash::make(1234)
+        ]);
     }
 }
