@@ -5,11 +5,9 @@ namespace App\Services\Wallet;
 use App\Models\Wallet\Wallet;
 use App\Models\Wallet\Currency;
 use App\Enum\Wallet\WalletTypeEnum;
-use App\Services\Wallet\TransactionTrait;
 
-class WalletService {
-    use TransactionTrait;
-
+class WalletService
+{
     public static function createWallet(
         int|object $idOrObject,
         int $currency = 1,
