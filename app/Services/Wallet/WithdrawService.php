@@ -41,7 +41,7 @@ class WithdrawService
         $amount = WalletService::amountToDb($this->amount, $this->wallet->metaMinorUnit);
 
         if (! $this->forced) {
-            $this->validated($amount);
+            $this->validated($amount, $this->wallet->id);
         }
 
         if ($this->confirmed) {

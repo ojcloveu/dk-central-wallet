@@ -20,12 +20,14 @@ trait ValidateTrait
         return $this;
     }
 
-    protected function validated($amount)
+    protected function validated($amount, $walletId)
     {
         $select = Transaction::selectRaw('
             SUM(CASE WHEN confirmed = 1 THEN balance ELSE 0 END) AS sum_confirmed,
             SUM(CASE WHEN confirmed = 0 AND balance < 0 THEN balance ELSE 0 END) AS sum_unconfirmed
-        ')->first();
+        ')
+            ->where('wallet_id', $walletId)
+            ->first();
 
         $blockAmount = $amount + abs($select->sum_unconfirmed);
 
