@@ -11,7 +11,94 @@
 			"item": [
 				{
 					"name": "Transaction",
-					"item": []
+					"item": [
+						{
+							"name": "Deposit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_number\": \"000 000 001\",\n    \"amount\": 100\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/deposit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"deposit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Withdraw",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_number\": \"000 000 001\",\n    \"amount\": 5\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/withdraw",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"withdraw"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Logout",
