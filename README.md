@@ -16,3 +16,10 @@ then update env (value from password grand type): `PASSPORT_PASSWORD_ID`, `PASSP
 Library IssueToken has been update to work with new passport version but currently only support from env, not work with param pass down along with method
 
 Next, run seeder `php artisan db:seed --class="Database\\Seeders\\Production\\BaseSeeder"`
+
+make sure create new database for test, do not use together with your original db, as it will fresh
+i set to use with mysql
+just update value in file: .env.testing
+
+Test: 'php artisan test'
+does not work with --parallel flag
