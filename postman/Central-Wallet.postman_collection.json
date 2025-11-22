@@ -97,6 +97,49 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Transfer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from\": \"000 000 001\",\n    \"to\": \"000 000 002\",\n    \"amount\": 5\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/transfer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"transfer"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -230,6 +273,146 @@
 			]
 		},
 		{
+			"name": "Oauth",
+			"item": [
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Deposit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{clientToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": [\n        {\"user_id\": \"1\", \"amount\": 10, \"identity\": 1},\n        {\"user_id\": \"2\", \"amount\": 5, \"remark\": \"remove debt\"}\n    ],\n    \"wallet_type\": \"default\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/s2s-api/deposit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"s2s-api",
+										"deposit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Withdraw",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{clientToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": [\n        {\"user_id\": \"1\", \"amount\": 10, \"identity\": 1},\n        {\"user_id\": \"2\", \"amount\": 5, \"remark\": \"remove debt\"}\n    ],\n    \"wallet_type\": \"default\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/s2s-api/withdraw",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"s2s-api",
+										"withdraw"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{clientToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": [\n        {\"from\": \"1\", \"to\": \"2\", \"amount\": 10, \"remark\": \"remove debt\"},\n        {\"from\": \"2\", \"to\": \"1\", \"amount\": 10, \"identity\": 1}\n    ],\n    \"wallet_type\": \"default\",\n    \"remark\": \"pay debt\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/s2s-api/transfer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"s2s-api",
+										"transfer"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Sample json data:\n\n``` json\n{\n    \"data\": [\n        {\"user_id\": \"1\", \"amount\": 10, \"identity\": 1},\n        {\"user_id\": \"2\", \"amount\": 5, \"remark\": \"remove debt\"}\n    ],\n    \"wallet_type\": \"default\",\n    \"remark\": \"pay debt\"\n}\n\n ```\n\n\\~ **data**: maximum array accept is 100\n\n\\~ key inside data array:\n\nDeposit & Withdraw API: **user_id**, **amount**, **remark**, **identity**\n\nTransfer API: **from**, **to**, **amount**, **remark**, **identity**\n\n\\~ Key meaning\n\n**user_id**: user id you want to deposit/withdraw\n\n**from**: user id you want to transfer (withdraw from)\n\n**to**: user id you want to transfer (deposit to)\n\n**amount**: numeric\n\n**remark**: description about your transaction, maximum 255 length\n\n**identity**: your unique uuid, in case error happen we use send this id back to notify"
+				}
+			]
+		},
+		{
 			"name": "Oauth login",
 			"request": {
 				"auth": {
@@ -250,7 +433,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"019a6fcc-435e-7083-9406-263282b8d1cf\",\n    \"client_secret\": \"g2msY1wFJf7dssBQ897RSv5WyEnUuM5JwPE4pors\"\n}"
+					"raw": "{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"019aace4-0477-722f-81ac-2ec82313964e\",\n    \"client_secret\": \"mHxNeO4HTdR82JHUo5TZIevnVcxKNXGKtqv4jeCL\",\n    \"scope\": \"oauth\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/oauth/token",

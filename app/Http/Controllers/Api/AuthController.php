@@ -48,7 +48,7 @@ class AuthController extends Controller
 
         $res = IssueToken::scope($this->scope, 'email')
             ->useRefreshTokenGrantType()
-            ->issueToken($req);
+            ->create($req);
 
         if (! $res->success) {
             return ResponseLib::error(
@@ -86,7 +86,7 @@ class AuthController extends Controller
 
             $res = IssueToken::scope($this->scope, 'email')
                 ->usePasswordGrantType()
-                ->issueToken($req);
+                ->create($req);
 
             return (new AuthResource($user))->additional([
                 'token' => $res->json,
@@ -112,7 +112,7 @@ class AuthController extends Controller
         $res = IssueToken::scope($this->scope, 'email')
             ->usePasswordGrantType()
             ->skipPasswordCheck()
-            ->issueToken($req);
+            ->create($req);
 
         return (new AuthResource($user))->additional([
             'token' => $res->json,

@@ -8,5 +8,4 @@ enum WalletTypeEnum: string
     use EnumTrait;
     
     case DEFAULT = 'default';
-
 }

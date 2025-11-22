@@ -10,6 +10,8 @@ use Database\Seeders\Production\BaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+// php artisan test --filter=DepositTest
+
 uses(DatabaseMigrations::class); // Add this line
 
 // uses(RefreshDatabase::class); // Add this line
